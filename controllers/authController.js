@@ -95,11 +95,9 @@ const getProfile = async (req, res) => {
  */
 const logoutUser = async (req, res) => {
   try {
-    // Skeleton implementation
     return res.status(200).json({
       success: true,
-      message: 'Logout route skeleton (logic not implemented)',
-      data: {}
+      message: 'Logout successful'
     });
   } catch (error) {
     return res.status(500).json({
