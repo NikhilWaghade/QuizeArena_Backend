@@ -1,19 +1,12 @@
-const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
+const app = require('./app');
 
 // Load dotenv configuration
 dotenv.config();
 
 // Connect MongoDB
 connectDB();
-
-// Initialize Express App
-const app = express();
-
-// Parse JSON and urlencoded requests
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Define PORT
 const PORT = process.env.PORT || 5000;
