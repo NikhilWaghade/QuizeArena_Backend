@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes');
 const schoolRoutes = require('./routes/schoolRoutes');
 const teamRoutes = require('./routes/teamRoutes');
+const competitionRoutes = require('./routes/competitionRoutes');
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 app.use('/api/schools', schoolRoutes);
 app.use('/api/teams', teamRoutes);
+app.use('/api/competitions', competitionRoutes);
 
 module.exports = app;
