@@ -1,3 +1,7 @@
+const bcrypt = require('bcryptjs');
+const User = require('../models/User');
+const generateToken = require('../utils/generateToken');
+
 /**
  * @desc    Authenticate user & get token
  * @route   POST /api/auth/login
@@ -5,11 +9,53 @@
  */
 const loginUser = async (req, res) => {
   try {
-    // Skeleton implementation
+    const { email, password } = req.body;
+
+    // Validate email and password presence
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email and password are required',
+        error: {}
+      });
+    }
+
+    // Find user by email
+    const user = await User.findOne({ email });
+
+    // If user doesn't exist
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password',
+        error: {}
+      });
+    }
+
+    // Compare password using bcryptjs
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password',
+        error: {}
+      });
+    }
+
+    // Generate JWT using generateToken
+    const token = generateToken(user._id);
+
+    // Prepare user object without password
+    const userResponse = user.toObject();
+    delete userResponse.password;
+
     return res.status(200).json({
       success: true,
-      message: 'Login route skeleton (logic not implemented)',
-      data: {}
+      message: 'Login successful',
+      data: {
+        token,
+        user: userResponse
+      }
     });
   } catch (error) {
     return res.status(500).json({
