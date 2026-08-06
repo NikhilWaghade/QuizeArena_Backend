@@ -6,6 +6,7 @@ const schoolRoutes = require('./routes/schoolRoutes');
 const teamRoutes = require('./routes/teamRoutes');
 const competitionRoutes = require('./routes/competitionRoutes');
 const questionRoutes = require('./routes/questionRoutes');
+const hostRoutes = require('./routes/hostRoutes');
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use('/api/schools', schoolRoutes);
 app.use('/api/teams', teamRoutes);
 app.use('/api/competitions', competitionRoutes);
 app.use('/api/questions', questionRoutes);
+app.use('/api/host', hostRoutes);
 
 module.exports = app;
