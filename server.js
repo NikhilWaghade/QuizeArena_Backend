@@ -1,6 +1,8 @@
+const http = require('http');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const app = require('./app');
+const { initSocket } = require('./sockets/socket');
 
 // Load dotenv configuration
 dotenv.config();
@@ -8,11 +10,17 @@ dotenv.config();
 // Connect MongoDB
 connectDB();
 
+// Create HTTP server wrapping Express app
+const server = http.createServer(app);
+
+// Initialize Socket.IO
+initSocket(server);
+
 // Define PORT
 const PORT = process.env.PORT || 5000;
 
-// Start Express Server
-const server = app.listen(PORT, () => {
+// Start Express / Socket.IO Server
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
