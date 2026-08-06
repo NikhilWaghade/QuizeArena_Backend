@@ -5,6 +5,7 @@ const authRoutes = require('./routes/authRoutes');
 const schoolRoutes = require('./routes/schoolRoutes');
 const teamRoutes = require('./routes/teamRoutes');
 const competitionRoutes = require('./routes/competitionRoutes');
+const questionRoutes = require('./routes/questionRoutes');
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/schools', schoolRoutes);
 app.use('/api/teams', teamRoutes);
 app.use('/api/competitions', competitionRoutes);
+app.use('/api/questions', questionRoutes);
 
 module.exports = app;
